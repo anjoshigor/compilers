@@ -75,11 +75,22 @@ MUL|111
 
 Na arquitetura criada, cada espaço de memória pode ocupar 8 bits e todas as constantes podem ocupar os 8 bits. Utilizando 1 bit como flag para diferir endereços de memória de constantes, é possível flexibilizar uma operação, dado exemplo abaixo:
 
-`LOAD TRUE  0000 0010`
+`LOAD TRUE  0000 0010` //Carrega a constante **2** no acumulador
 
-`STORE TRUE 0000 0001`
+`LOAD FALSE 0000 0010` //Carrega o conteúdo do endereço de memória **0000 0001** no acumulador
 
-///lembrar do jump
+Então, a configuração geral de uma operação tem a seguinte forma:
+
+**Descrição das operações:**
+
+* **LOAD**: Carrega o conteúdo do endereço ou constante especififcada no acumulador da ULA.
+* **STORE**: Armazena o conteúdo do acumulador na endereço de memória especificado.
+* **CMP**: Compara o que existe no acumulador com o especificado e armazena o resultado no acumulador. *(0 para igual | 1 para diferente)*
+* **JE**: Verifica o valor armazenado no acumulador. Se o valor presente for **0**, o contador de programa aponta para a linha especificado.
+* **SUB**: Subtrai o que está no acumulador com o operando e armazena o valor no acumulador.
+* **ADD**: Adiciona o que está no acumulador com o operando e armazena o valor no acumulador.
+* **MUL**: Multiplica o que está no acumulador com o operando e armazena o valor no acumulador.
+
 As variáveis do programa foram consideradas já inicializadas e estão presentes na memória e ocupam os endereços a seguir:
 
 VARIÁVEL|ENDEREÇO
