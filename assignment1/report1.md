@@ -80,6 +80,7 @@ Na arquitetura criada, cada espaço de memória pode ocupar 8 bits e todas as co
 `LOAD FALSE 0000 0010` //Carrega o conteúdo do endereço de memória **0000 0001** no acumulador
 
 Então, a configuração geral de uma operação tem a seguinte forma:
+![Representação geral de uma operação](https://github.com/anjoshigor/compilers/blob/master/assignment1/images/represent.png)
 
 **Descrição das operações:**
 
