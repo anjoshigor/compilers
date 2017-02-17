@@ -10,4 +10,4 @@ O autômato abaixo satisfaz as especificações com algumas convenções:
 **Convenções**
 
 * Cada entrada não esperada nos estados do autômato leva para o estado inicial **1**
-* \sum representa todo o alfabeto.
+* <html>&#931;</html> representa todo o alfabeto.
