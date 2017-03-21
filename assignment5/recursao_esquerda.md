@@ -47,11 +47,7 @@ tipo →
 
 ```
 declarações_de_subprogramas →
-	declaração_de_subprograma; declarações_de_subprogramas' 
-	
-
-declarações_de_subprogramas' →
-	declarações_de_subprogramas
+	declaração_de_subprograma; declarações_de_subprogramas
 	| ε
 ```
 
