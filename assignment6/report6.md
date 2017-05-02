@@ -1,11 +1,22 @@
-Eliminando recursões à esquerda
+Eliminando recursões à esquerda e ambiguidade
 ====
 
 As recursões à esquerda foram eliminadas seguindo o modelo abaixo:
 
+>A →  Aα| β 
+>
 >A → βA'
 >
 >A'→ αA' | ε
+
+As ambiguidades foream eiminadas seguindo o modelo abaixo:
+
+>A → A | Aα
+>
+>A → A A_x
+>
+>A_x→ α | ε
+
 
 
 ```
@@ -47,11 +58,7 @@ tipo →
 
 ```
 declarações_de_subprogramas →
-	declaração_de_subprograma; declarações_de_subprogramas' 
-	
-
-declarações_de_subprogramas' →
-	declarações_de_subprogramas
+	declaração_de_subprograma; declarações_de_subprogramas
 	| ε
 ```
 
@@ -121,8 +128,11 @@ variável →
 
 ```
 ativação_de_procedimento →
-	id
-	| id (lista_de_expressões)
+	id x
+	
+ativação_de_procedimento_x →
+	(lista_de_expressões) | ε
+
 ```
 
 ```
@@ -136,8 +146,11 @@ lista_de_expressões' →
 
 ```
 expressão →
-	expressão_simples
-	| expressão_simples op_relacional expressão_simples
+	expressão_simples expressão_x
+
+expressão_x → 
+	op_relacional expressão_simples
+	| ε
 ```
 
 ```
@@ -161,14 +174,17 @@ termo' →
 
 ```
 fator →
-	id
-	| id(lista_de_expressões)
+	id fator_x
 	| num_int
 	| num_real
 	| true
 	| false
 	| (expressão)
 	| not fator
+
+fator_x →
+	(lista_de_expressões)
+	| ε
 ```
 
 ```
@@ -178,7 +194,13 @@ sinal →
 
 ```
 op_relacional →
-	= | < | > | <= | >= | <>
+	= | <op_relacional_x | >op_relacional_y
+
+op_relacional_x →
+	= | > | ε 
+
+op_relacional_y →
+	= | ε 
 ```
 
 ```
