@@ -1,6 +1,6 @@
   Atividade 5
 ======
-1.  Encontre gramáticas livre de contexto que gerem as linguagens [veja doc](https://github.com/anjoshigor/compilers/blob/master/assignment5/Atividade05.pdf):
+1.  Encontre gramáticas livre de contexto que gerem as linguagens [veja doc](docs/Atividade05.pdf):
     - a) 
     ```
     G = (V,T,P,S)
@@ -41,7 +41,7 @@
     T = {0,1}
     S → 0S1 | 1S0 | 0S0 | 1S1 | 0
     ```
-2.  Explique porque a gramática abaixo é ambígua [veja doc](https://github.com/anjoshigor/compilers/blob/master/assignment5/Atividade05.pdf):
+2.  Explique porque a gramática abaixo é ambígua [veja doc](docs/Atividade05.pdf):
 
       - A gramática é ambígua por produzir a mesma cadeia de caracteres com derivações diferentes, veja um exemplo de produção da cadeia **00110011**
       
@@ -55,7 +55,7 @@
 |6| 0011001A     | 0011001A    |
 |7| **00110011** |**00110011** |
 
-3.  Dada a seguinte gramática livre de contexto ambígua, faça o que se pede [veja doc](https://github.com/anjoshigor/compilers/blob/master/assignment5/Atividade05.pdf):
+3.  Dada a seguinte gramática livre de contexto ambígua, faça o que se pede [veja doc](docs/Atividade05.pdf):
 
     - a) Encontre uma string *s* gerada pela gramática que tem duas derivações mais à esquerda. Mostre as derivações.
       
@@ -64,3 +64,23 @@
 |1| Ab           | aaB          |
 |2| Aab         | **aab**        |
 |3| **aab** |-|
+
+
+    - b) Desenhe as árvores sintáticas resultantes das duas derivações da string s.
+```
+    S
+   / \
+  A   b
+ / \
+A   a
+|
+a
+```
+```
+  S
+ / | \
+a  a  B
+      |
+      b
+```
+

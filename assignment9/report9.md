@@ -83,16 +83,21 @@ Código intermediário:
 ```
 
 
-Novamente, `x` está recebendo uma constante. A expressão avaliada tem o seu resultado atribuído à variável `x`, portanto ela pode receber o temporário
-depois, já que *0* não influencia na soma.
+O Código refere-se a um loop onde o `x` é utilizado para sair da condição. É possível notar que a multiplicação de `t1` resulta sempre em valores
+que não dependem de `x`, portanto a única otimização seria retirar a operação de dentro do loop, evitando seu cálculo repetidamente.
 
 Código intermediário otimizado:
 
 ```assembly
-    1 MOV t1 y A
-    2 MOV x t1
-    3 RTN  
+    1 MOV x 0
+    2 MULT t1 y A
+    3 JGT x 10 7
+    4 ADD t2 x t1
+    5 MOV x t2
+    6 JMP 2
+    7 RTN  
 ```
+
 
 - c)
 
@@ -118,20 +123,41 @@ Código intermediário:
     17 MOV p f 
 ```
 
-A primeira linha pode ser retirada devido à sobrescrita de `p` em `a`. Como as variáveis `a` e `p` são iguais, a divisão delas é sempre 1.
-É possível ver dentro do loop que as duas variáveis são decrementadas no mesmo fator. Podemos então eliminar as variáveis temporárias e reaproveitar
-as mesmas variáveis para realizar o decremento em 1. A condição da linha *5* nunca será satisfeita, pois o valor de `t1` sempre será 1.
+Para melhor identificar os pontos de otimização, é possível mostrar o código em forma de pseudocódigo. No final, o código que consegui chegar foi
+o seguinte:
+
+```python
+while a<0
+    t1 = a/p
+    
+    if t1>0.5
+        f = f - t1
+    elif t1<0.5 
+        f = f + t1
+
+    a -= a
+p = f
+```
+
+Desse modo, fica mais fácil identificar que muitas variáveis intermediárias realizavam a mesma operação `a/p` e, portanto, podiam ser excluídas. Ainda,
+conhecendo as condições, é mais simples entender os pontos onde otimizar. Por fim, basta representar o código acima como se segue.
 
 Código intermediário otimizado:
 
 ```assembly
     1 MOV a p
     2 JGT 0 a 17
-    3 MOV t5 1 
-    4 SUB f f t5
-    5 SUB a a 1 
-    6 JMP 3
-    7 MOV p f 
+    3 DIV t1 a p
+    4 JGT t1 0.5 7
+    5 ADD t3 f t1
+    6 MOV f t3
+    7 JGT 0.5 t1 10
+    8 SUB t6 f t1
+    9 MOV f t6
+    10 SUB t7 a 1
+    11 MOV a t7
+    12 JMP 2
+    13 MOV p f 
 ```
 3.  Indique qual o numero de registradores necessários para calcular as expressões a seguir. Lembrando que você precisa passar as instruções 
 abaixo para a codificação de três endereços. (utilizem quantos registradores forem necessários)
