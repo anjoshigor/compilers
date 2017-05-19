@@ -194,13 +194,7 @@ sinal →
 
 ```
 op_relacional →
-	= | <op_relacional_x | >op_relacional_y
-
-op_relacional_x →
-	= | > | ε 
-
-op_relacional_y →
-	= | ε 
+	= | < | > | <= | >= |<>
 ```
 
 ```
